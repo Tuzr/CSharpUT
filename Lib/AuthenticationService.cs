@@ -7,6 +7,14 @@ namespace Lib
     {
         private IProfile _profile;
         private IToken _token;
+        private INotification _notification;
+
+        public AuthenticationService(IProfile profile, IToken token, INotification notification)
+        {
+            _profile = profile;
+            _token = token;
+            _notification = notification;
+        }
 
         public AuthenticationService(IProfile profile, IToken token)
         {
@@ -38,6 +46,7 @@ namespace Lib
             }
             else
             {
+                _notification.Send($"{account} try login failed.");
                 return false;
             }
         }
