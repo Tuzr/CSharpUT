@@ -8,6 +8,12 @@ namespace Lib
         private IProfile _profile;
         private IToken _token;
 
+        public AuthenticationService(IProfile profile, IToken token)
+        {
+            _profile = profile;
+            _token = token;
+        }
+
         public AuthenticationService()
         {
             _profile = new ProfileDao();
