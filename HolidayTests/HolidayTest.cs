@@ -7,27 +7,41 @@ namespace HolidayTests
     [TestFixture]
     public class Holidaytest
     {
+        private HolidayForTest _holiday;
+
+        [SetUp]
+        public void Setup()
+        {
+            _holiday = new HolidayForTest();
+        }
+
         [Test]
         public void today_is_xmas()
         {
-            var holiday = new HolidayForTest();
-
-            holiday.today = new DateTime(2000, 12, 25);
-
-            Assert.True(holiday.SayHello() == "Merry Xmas");
+            GivenToday(12, 25);
+            ResponseShouldBe("Merry Xmas");
         }
 
         [Test]
         public void today_is_not_xmas()
         {
-            var holiday = new Holiday();
+            GivenToday(12, 26);
+            ResponseShouldBe("Today is not Xmas");
+        }
 
-            Assert.True(holiday.SayHello() == "Today is not Xmas");
+        private void ResponseShouldBe(string expected)
+        {
+            Assert.AreEqual(expected,_holiday.SayHello());
+        }
+
+        private void GivenToday(int month, int day)
+        {
+            _holiday.today = new DateTime(2000, month, day);
         }
 
         private class HolidayForTest : Holiday
         {
-            public DateTime today= DateTime.Now;
+            public DateTime today = DateTime.Now;
 
             protected override DateTime GetToday()
             {
