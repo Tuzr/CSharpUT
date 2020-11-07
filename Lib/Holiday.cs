@@ -28,7 +28,7 @@ namespace Lib
 
         protected virtual DateTime GetToday()
         {
-            var today = DateTime.Now;
+            var today = new DateTime();
             return today;
         }
     }
